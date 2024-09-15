@@ -14,9 +14,15 @@ if (process.env.NODE_ENV !== 'test') {
   }
 
 const app = express();
+
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL
+  origin: 'https://movies4-u-frontend.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', userRoute);
