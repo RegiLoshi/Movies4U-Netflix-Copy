@@ -1,8 +1,8 @@
 import express from 'express';
-import Author from '../models/Author.js';
+import Author from '../models/author.js';
 import Show from '../models/show.js';
 import Season from '../models/season.js';
-import Episode from '../models/Episode.js';
+import Episode from '../models/episode.js';
 import Movie from '../models/movie.js';
 
 const router = express.Router();
