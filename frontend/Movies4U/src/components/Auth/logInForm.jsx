@@ -48,6 +48,7 @@ const LogInForm = () => {
                     icon: "error",
                   });
             }else{
+                console.log(error);
                     swal({
                         title: "Registration Failed",
                         text: "An error occurred while registering. Please try again later.",

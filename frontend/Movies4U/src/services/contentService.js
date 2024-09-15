@@ -1,15 +1,15 @@
-import axios from "axios";
-
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api/profile';
-
+import axios from 'axios';
+import API_ENDPOINTS from '../api.js';
 
 const api = axios.create({
-  baseURL: BASE_URL
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  }
 });
 
 export const getShows = async () => {
   try {
-    const response = await api.get('shows');
+    const response = await api.get(API_ENDPOINTS.CONTENT.SHOWS);
     return response.data;
   } catch (error) {
     console.error('Error fetching shows:', error);
@@ -19,7 +19,7 @@ export const getShows = async () => {
 
 export const getMovies = async () => {
   try {
-    const response = await api.get('movies');
+    const response = await api.get(API_ENDPOINTS.CONTENT.MOVIES);
     return response.data;
   } catch (error) {
     console.error('Error fetching movies:', error);
@@ -27,9 +27,10 @@ export const getMovies = async () => {
   }
 };
 
+
 export const getShow = async (id) => {
   try {
-    const response = await api.get(`shows/${id}`);
+    const response = await api.get(API_ENDPOINTS.CONTENT.SHOW_BY_ID(id));
     return response.data;
   } catch (error) {
     console.error(`Error fetching show with id ${id}:`, error);
@@ -39,7 +40,7 @@ export const getShow = async (id) => {
 
 export const getMovie = async (id) => {
   try {
-    const response = await api.get(`movies/${id}`);
+    const response = await api.get(API_ENDPOINTS.CONTENT.MOVIE_BY_ID(id));
     return response.data;
   } catch (error) {
     console.error(`Error fetching movie with id ${id}:`, error);
@@ -48,23 +49,22 @@ export const getMovie = async (id) => {
 };
 
 export const getShowsByGenre = async (genre) => {
-    try {
-      const response = await api.get('shows/genre', { params: { genre } });
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching shows with genre ${genre}:`, error);
-      throw error;
-    }
-  };
-  
-  export const getMoviesByGenre = async (genre) => {
-    try {
-      const response = await api.get('movies/genre', { params: { genre } });
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching movies with genre ${genre}:`, error);
-      throw error;
-    }
-  };
+  try {
+    const response = await api.get(API_ENDPOINTS.CONTENT.SHOWS_BY_GENRE, { params: { genre } });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching shows with genre ${genre}:`, error);
+    throw error;
+  }
+};
 
-  
+export const getMoviesByGenre = async (genre) => {
+  try {
+    const response = await api.get(API_ENDPOINTS.CONTENT.MOVIES_BY_GENRE, { params: { genre } });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching movies with genre ${genre}:`, error);
+    throw error;
+  }
+};
+

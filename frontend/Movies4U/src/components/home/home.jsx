@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Header from './Header';
 import { getContent } from '../../redux/contentActions';
-import Preview from '../preview';
+import Preview from '../Preview';
 import ShowLists from '../ShowLists';
 
 function Home() {

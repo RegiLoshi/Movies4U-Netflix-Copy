@@ -1,10 +1,8 @@
 import axios from 'axios';
-
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api/profile';
-
+import API_ENDPOINTS from '../api.js';
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: API_ENDPOINTS.PROFILE.BASE,
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
@@ -42,29 +40,28 @@ export const deleteUser = async (id) => {
 
 export const addLikedShow = async (id, showId) => {
   try {
-    const response = await api.put(`/${id}/likedShows/${showId}`);
+    const response = await api.put(API_ENDPOINTS.PROFILE.LIKED_SHOWS(id) + `/${showId}`);
     return response.data;
   } catch (error) {
     console.error('Error adding liked show:', error);
     throw error;
   }
-}
+};
 
 export const getLikedShows = async (id) => {
   try {
-    const response = await api.get(`/${id}/likedShows`);
+    const response = await api.get(API_ENDPOINTS.PROFILE.LIKED_SHOWS(id));
     return response.data;
   } catch (error) {
     throw error;
   }
-}
+};
 
 export const removeLikedShow = async (id, showId) => {
   try {
-    const response = await api.delete(`/${id}/likedShows/${showId}`);
+    const response = await api.delete(API_ENDPOINTS.PROFILE.LIKED_SHOWS(id) + `/${showId}`);
     return response.data;
   } catch (error) {
     throw error;
   }
-}
-  
+};
