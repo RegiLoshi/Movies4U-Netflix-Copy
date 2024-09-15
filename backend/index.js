@@ -14,7 +14,9 @@ if (process.env.NODE_ENV !== 'test') {
   }
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL
+}));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', userRoute);
