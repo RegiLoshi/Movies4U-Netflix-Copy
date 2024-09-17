@@ -13,6 +13,7 @@ function Home() {
     useEffect(() => {
         dispatch(getContent());
     }, [dispatch]);
+    
 
     if (!shows || shows.length === 0) {
         return (
