@@ -22,7 +22,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', userRoute);
