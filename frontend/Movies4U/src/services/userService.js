@@ -59,9 +59,7 @@ export const addLikedShow = async (id, showId) => {
 
 export const getLikedShows = async (id) => {
   try {
-    console.log('getLikedShows - Fetching for user:', id);
     const response = await api.get(API_ENDPOINTS.PROFILE.LIKED_SHOWS(id));
-    console.log('getLikedShows - Response:', response.data);
     return response.data;
   } catch (error) {
     throw error;
