@@ -3,11 +3,20 @@ import API_ENDPOINTS from '../api.js';
 
 const api = axios.create({
   baseURL: API_ENDPOINTS.PROFILE.BASE,
-  headers: {
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-  }
 });
 
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token'); 
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`; 
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 export const getUser = async (id) => {
   try {
     const response = await api.get(`/${id}`);
@@ -50,7 +59,9 @@ export const addLikedShow = async (id, showId) => {
 
 export const getLikedShows = async (id) => {
   try {
+    console.log('getLikedShows - Fetching for user:', id);
     const response = await api.get(API_ENDPOINTS.PROFILE.LIKED_SHOWS(id));
+    console.log('getLikedShows - Response:', response.data);
     return response.data;
   } catch (error) {
     throw error;
