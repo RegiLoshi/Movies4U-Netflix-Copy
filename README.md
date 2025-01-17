@@ -63,7 +63,6 @@ Movies4U is a web application built using the MERN (MongoDB, Express.js, React, 
 - (Add any other features specific to your application)
 
 ## Testing
-- Frontend: (Add instructions if you have frontend tests)
 - Backend: Run tests using Jest
   ```
   npm test
